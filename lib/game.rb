@@ -26,10 +26,10 @@ class Game
   end
 
   def switch_player
-    if @current_player == 1
-      return @current_player = 2
+    @current_player = if @current_player == 1
+      2
     else
-      return @current_player = 1
+      1
     end
   end
 
@@ -57,10 +57,10 @@ class Game
   end
 
   def win_check
-    if @current_player == 2
-      @winner = @player1.name
+    @winner = if @current_player == 2
+      @player1.name
     else
-      @winner = @player2.name
+      @player2.name
     end
     if @game_board.board[0] == @game_board.board[3] && @game_board.board[0] == @game_board.board[6] ||
        @game_board.board[1] == @game_board.board[4] && @game_board.board[1] == @game_board.board[7] ||

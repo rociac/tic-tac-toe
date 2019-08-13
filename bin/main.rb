@@ -21,7 +21,7 @@ until play == 'N'
     game.weapon1 = gets.chomp.upcase!
   end
 
-  game.weapon1 == 'X' ? game.weapon2 = 'O' : game.weapon2 = 'X'
+  game.weapon2 = game.weapon1 == 'X' ? 'O' : 'X'
 
   puts 'Enter name for player 2'
   name2 = gets.chomp
