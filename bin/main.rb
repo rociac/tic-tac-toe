@@ -31,6 +31,6 @@ game.create_players(name1, name2, weapon1, weapon2)
 
 game.game_board.display_board
 
-5.times do
+until game.win_check
   game.playround
 end
