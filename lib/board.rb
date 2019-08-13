@@ -16,12 +16,15 @@ class Board
   end
 
   def display_board
-    puts @board.slice(0, 3).join(" ")
-    puts @board.slice(3, 3).join(" ")
-    puts @board.slice(6, 3).join(" ")
+    puts "----------"
+    puts " "
+    puts @board.slice(0, 3).join("   ")
+    puts " "
+    puts @board.slice(3, 3).join("   ")
+    puts " "
+    puts @board.slice(6, 3).join("   ")
+    puts " "
+    puts "----------"
   end
 
 end
-
-game = Board.new
-game.display_board
