@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#Board class
+# Board class
 class Board
   attr_reader :possible_wins
   attr_accessor :board

@@ -3,27 +3,26 @@
 require_relative 'board.rb'
 require_relative 'player.rb'
 
-
 # Game logic
 class Game
-attr_reader :game_board
-attr_reader :player1
-attr_reader :player2
-attr_reader :winner
+  attr_reader :game_board
+  attr_reader :player1
+  attr_reader :player2
+  attr_reader :winner
+  attr_accessor :weapon1
+  attr_accessor :weapon2
 
-  def initialize 
+  def initialize
     @game_board = Board.new
     @input = false
     @current_player = 1
+    @weapon1 = ""
+    @weapon2 = ""
   end
 
   def create_players(name1, name2, weapon1, weapon2)
-    @player1 = Player.new(name1, weapon1)
-    @player2 = Player.new(name2, weapon2)
-  end
-
-  def userinput
-    
+    @player1 = Player.new(name1, @weapon1)
+    @player2 = Player.new(name2, @weapon2)
   end
 
   def switch_player
@@ -35,7 +34,6 @@ attr_reader :winner
   end
 
   def playround
-
     until @input
       if @current_player == 1
         puts "#{@player1.name.red} choose a number from 0 to 8 to place your weapon"
@@ -58,16 +56,13 @@ attr_reader :winner
     @input = false
   end
 
-  def reset
-  end
-
   def win_check
     if @current_player == 2
       @winner = @player1.name
     else
       @winner = @player2.name
     end
-    if @game_board.board[0] == @game_board.board[3] && @game_board.board[0] == @game_board.board[6] || 
+    if @game_board.board[0] == @game_board.board[3] && @game_board.board[0] == @game_board.board[6] ||
        @game_board.board[1] == @game_board.board[4] && @game_board.board[1] == @game_board.board[7] ||
        @game_board.board[2] == @game_board.board[5] && @game_board.board[2] == @game_board.board[8] ||
        @game_board.board[0] == @game_board.board[1] && @game_board.board[0] == @game_board.board[2] ||
@@ -75,19 +70,11 @@ attr_reader :winner
        @game_board.board[6] == @game_board.board[7] && @game_board.board[6] == @game_board.board[8] ||
        @game_board.board[0] == @game_board.board[4] && @game_board.board[0] == @game_board.board[8] ||
        @game_board.board[2] == @game_board.board[4] && @game_board.board[2] == @game_board.board[6]
-        return true
+      return true
     end
   end
 
   def draw_check
-    true if @game_board.board.none? {|i| i.is_a?(Integer) } 
+    true if @game_board.board.none? { |i| i.is_a?(Integer) }
   end
 end
-
-
-#takes user input
-# puts the weapon on the cell
-#win check
-#if false
-#current player = player 2
-#starts over
