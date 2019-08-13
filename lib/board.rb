@@ -12,18 +12,16 @@ class Board
       [0, 4, 8],
       [2, 4, 6]
     ]
-    @board = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8]
-    ]
+    @board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
   end
 
   def display_board
-    @board.each do |cell|
-      print cell
-      print "\n"
-    end
+    puts @board.slice(0, 3).join(" ")
+    puts @board.slice(3, 3).join(" ")
+    puts @board.slice(6, 3).join(" ")
   end
 
 end
+
+game = Board.new
+game.display_board
