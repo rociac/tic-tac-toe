@@ -31,6 +31,15 @@ game.create_players(name1, name2, weapon1, weapon2)
 
 game.game_board.display_board
 
-until game.win_check
+until game.win_check || game.draw_check
   game.playround
 end
+
+if game.win_check
+  puts "#{game.winner} won the game!".yellow.on_red
+else
+  puts 'It\'s a draw!'.yellow.on_red
+end
+
+puts 'Do you want to play again? Y/N'
+playagain = gets.chomp

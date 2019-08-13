@@ -9,6 +9,7 @@ class Game
 attr_reader :game_board
 attr_reader :player1
 attr_reader :player2
+attr_reader :winner
 
   def initialize 
     @game_board = Board.new
@@ -36,34 +37,36 @@ attr_reader :player2
   def playround
 
     until @input
-      puts "#{@player1.name.red} choose a number from 0 to 8 to place your weapon"
-      @player_choice = gets.chomp.to_i
-      if @game_board.board[@player_choice].is_a? Integer
-        @game_board.board[@player_choice] = @player1.weapon.red
-        @input = true
+      if @current_player == 1
+        puts "#{@player1.name.red} choose a number from 0 to 8 to place your weapon"
+        @player_choice = gets.chomp.to_i
+        if @game_board.board[@player_choice].is_a? Integer
+          @game_board.board[@player_choice] = @player1.weapon.red
+          @input = true
+        end
+      else
+        puts "#{@player2.name.blue} choose a number from 0 to 8 to place your weapon"
+        @player_choice = gets.chomp.to_i
+        if @game_board.board[@player_choice].is_a? Integer
+          @game_board.board[@player_choice] = @player2.weapon.blue
+          @input = true
+        end
       end
     end
-    
+    switch_player
     @game_board.display_board
     @input = false
-  
-    until @input
-      puts "#{@player2.name.blue} choose a number from 0 to 8 to place your weapon"
-      @player_choice = gets.chomp.to_i
-      if @game_board.board[@player_choice].is_a? Integer
-        @game_board.board[@player_choice] = @player2.weapon.blue
-        @input = true
-      end
-    end
-    @game_board.display_board
-    @input = false
-    win_check
   end
 
   def reset
   end
 
   def win_check
+    if @current_player == 2
+      @winner = @player1.name
+    else
+      @winner = @player2.name
+    end
     if @game_board.board[0] == @game_board.board[3] && @game_board.board[0] == @game_board.board[6] || 
        @game_board.board[1] == @game_board.board[4] && @game_board.board[1] == @game_board.board[7] ||
        @game_board.board[2] == @game_board.board[5] && @game_board.board[2] == @game_board.board[8] ||
@@ -77,7 +80,7 @@ attr_reader :player2
   end
 
   def draw_check
-
+    true if @game_board.board.none? {|i| i.is_a?(Integer) } 
   end
 end
 
