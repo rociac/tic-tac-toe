@@ -26,13 +26,11 @@ until play == 'N'
   puts 'Enter name for player 2'
   name2 = gets.chomp
 
-  game.create_players(name1, name2, game.weapon1, game.weapon2)
+  game.create_players(name1, name2)
 
   game.game_board.display_board
 
-  until game.win_check || game.draw_check
-    game.playround
-  end
+  until game.win_check || game.draw_check; game.playround end
 
   if game.win_check
     puts "#{game.winner} won the game!".yellow.on_red

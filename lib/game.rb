@@ -16,20 +16,20 @@ class Game
     @game_board = Board.new
     @input = false
     @current_player = 1
-    @weapon1 = ""
-    @weapon2 = ""
+    @weapon1 = ''
+    @weapon2 = ''
   end
 
-  def create_players(name1, name2, weapon1, weapon2)
+  def create_players(name1, name2)
     @player1 = Player.new(name1, @weapon1)
     @player2 = Player.new(name2, @weapon2)
   end
 
   def switch_player
     if @current_player == 1
-      @current_player = 2
+      return @current_player = 2
     else
-      @current_player = 1
+      return @current_player = 1
     end
   end
 
