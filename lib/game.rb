@@ -8,7 +8,6 @@ class Game
   attr_reader :game_board
   attr_reader :player1
   attr_reader :player2
-  attr_reader :winner
   attr_accessor :weapon1
   attr_accessor :weapon2
 
@@ -26,11 +25,7 @@ class Game
   end
 
   def switch_player
-    @current_player = if @current_player == 1
-      2
-    else
-      1
-    end
+    @current_player = @current_player == 1 ? 2 : 1
   end
 
   def playround
@@ -57,11 +52,6 @@ class Game
   end
 
   def win_check
-    @winner = if @current_player == 2
-      @player1.name
-    else
-      @player2.name
-    end
     if @game_board.board[0] == @game_board.board[3] && @game_board.board[0] == @game_board.board[6] ||
        @game_board.board[1] == @game_board.board[4] && @game_board.board[1] == @game_board.board[7] ||
        @game_board.board[2] == @game_board.board[5] && @game_board.board[2] == @game_board.board[8] ||
@@ -72,6 +62,10 @@ class Game
        @game_board.board[2] == @game_board.board[4] && @game_board.board[2] == @game_board.board[6]
       return true
     end
+  end
+  
+  def winner 
+    @current_player == 2 ? @player1.name : @player2.name
   end
 
   def draw_check
