@@ -51,20 +51,34 @@ class Game
     @input = false
   end
 
-  def win_check
-    if @game_board.board[0] == @game_board.board[3] && @game_board.board[0] == @game_board.board[6] ||
-       @game_board.board[1] == @game_board.board[4] && @game_board.board[1] == @game_board.board[7] ||
-       @game_board.board[2] == @game_board.board[5] && @game_board.board[2] == @game_board.board[8] ||
-       @game_board.board[0] == @game_board.board[1] && @game_board.board[0] == @game_board.board[2] ||
+  def win_horizontals
+    if @game_board.board[0] == @game_board.board[1] && @game_board.board[0] == @game_board.board[2] ||
        @game_board.board[3] == @game_board.board[4] && @game_board.board[3] == @game_board.board[5] ||
-       @game_board.board[6] == @game_board.board[7] && @game_board.board[6] == @game_board.board[8] ||
-       @game_board.board[0] == @game_board.board[4] && @game_board.board[0] == @game_board.board[8] ||
-       @game_board.board[2] == @game_board.board[4] && @game_board.board[2] == @game_board.board[6]
-      return true
+       @game_board.board[6] == @game_board.board[7] && @game_board.board[6] == @game_board.board[8]
+      true
     end
   end
-  
-  def winner 
+
+  def win_verticals
+    if @game_board.board[0] == @game_board.board[3] && @game_board.board[0] == @game_board.board[6] ||
+       @game_board.board[1] == @game_board.board[4] && @game_board.board[1] == @game_board.board[7] ||
+       @game_board.board[2] == @game_board.board[5] && @game_board.board[2] == @game_board.board[8]
+      true
+    end
+  end
+
+  def win_diagonals
+    if @game_board.board[0] == @game_board.board[4] && @game_board.board[0] == @game_board.board[8] ||
+       @game_board.board[2] == @game_board.board[4] && @game_board.board[2] == @game_board.board[6]
+      true
+    end
+  end
+
+  def win_check
+    true if win_horizontals || win_verticals || win_diagonals
+  end
+
+  def winner
     @current_player == 2 ? @player1.name : @player2.name
   end
 
