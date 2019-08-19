@@ -2,7 +2,6 @@
 
 # Board class
 class Board
-  attr_reader :possible_wins
   attr_accessor :board
 
   def initialize
