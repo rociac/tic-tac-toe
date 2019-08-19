@@ -3,7 +3,7 @@
 require_relative '../lib/player.rb'
 
 RSpec.describe Player do
-  let(:player) {described_class.new('player1', 'X')}
+  let(:player) { described_class.new('player1', 'X') }
 
   it 'should have a name' do
     expect(player.name).to eql('player1')

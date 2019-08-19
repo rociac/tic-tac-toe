@@ -17,19 +17,13 @@ RSpec.describe Game do
 
   context '#playround' do
     it 'should place the weapon on the board if the position is not occupied' do
-      if game_board.board[player_choice].is_a? Integer
-        game_board.board[player_choice] = player.weapon
-        input = true
-      end
+      game_board.board[player_choice] = player.weapon if game_board.board[player_choice].is_a? Integer
       expect(game_board.board[player_choice]).to eql('Weapon')
     end
 
     it 'should not be able to place if already occupied' do
       game_board.board[player_choice] = 'Weapon'
-      if game_board.board[player_choice].is_a? Integer
-        game_board.board[player_choice] = 'O'
-        input = true
-      end
+      game_board.board[player_choice] = 'O' if game_board.board[player_choice].is_a? Integer
       expect(game_board.board[player_choice]).to eql('Weapon')
     end
   end
@@ -48,7 +42,7 @@ RSpec.describe Game do
     it 'should return true if a diagonals line is filled with the same weapon' do
       allow(game).to receive(:win_diagonals).and_return(true)
       expect(game.win_check).to eql(true)
-    end   
+    end
   end
 
   describe '#draw_check' do
@@ -57,8 +51,8 @@ RSpec.describe Game do
     end
 
     it 'should return true if no item is an integer' do
-      full_board = game_board.board.map { |i| i = 'X' }
-      expect(full_board.none? {|i| i.is_a? Integer}).to eql(true)
+      full_board = game_board.board.map { 'X' }
+      expect(full_board.none? { |i| i.is_a? Integer }).to eql(true)
     end
   end
 end
