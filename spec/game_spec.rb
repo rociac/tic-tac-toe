@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../lib/game.rb'
 require_relative '../lib/board.rb'
 
@@ -53,7 +55,10 @@ RSpec.describe Game do
     it 'should return a falsy value if no draw' do
       expect(game.draw_check).to be_falsy
     end
+
+    it 'should return true if no item is an integer' do
+      full_board = game_board.board.map { |i| i = 'X' }
+      expect(full_board.none? {|i| i.is_a? Integer}).to eql(true)
+    end
   end
-
-
 end
