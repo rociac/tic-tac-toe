@@ -7,13 +7,6 @@ RSpec.describe Game do
   let(:game_board) { Board.new }
   let(:player) { Player.new('Name', 'Weapon') }
 
-  # context '#initialize' do
-  #   it 'should create a new board' do
-  #     expect(game.game_board).to be(Board.new)
-  #   end
-
-  # end
-
   context '#switch_player' do
     it 'should switch the current player' do
       expect(game.switch_player).to eql(2)
@@ -56,10 +49,9 @@ RSpec.describe Game do
     end   
   end
 
-  context '#winner' do
-    it 'should return the name of the winner' do
-      allow(game).to receive(:winner).and_return(player.name)
-      expect(game.winner).to eql('Name')
+  describe '#draw_check' do
+    it 'should return a falsy value if no draw' do
+      expect(game.draw_check).to be_falsy
     end
   end
 
