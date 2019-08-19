@@ -38,4 +38,30 @@ RSpec.describe Game do
       expect(game_board.board[player_choice]).to eql('Weapon')
     end
   end
+
+  context '#win_check' do
+    it 'should return true if a horizontal line is filled with the same weapon' do
+      allow(game).to receive(:win_horizontals).and_return(true)
+      expect(game.win_check).to eql(true)
+    end
+
+    it 'should return true if a vertical line is filled with the same weapon' do
+      allow(game).to receive(:win_verticals).and_return(true)
+      expect(game.win_check).to eql(true)
+    end
+
+    it 'should return true if a diagonals line is filled with the same weapon' do
+      allow(game).to receive(:win_diagonals).and_return(true)
+      expect(game.win_check).to eql(true)
+    end   
+  end
+
+  context '#winner' do
+    it 'should return the name of the winner' do
+      allow(game).to receive(:winner).and_return(player.name)
+      expect(game.winner).to eql('Name')
+    end
+  end
+
+
 end
