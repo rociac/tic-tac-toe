@@ -16,7 +16,7 @@ RSpec.describe Game do
 
   context '#playround' do
     it 'should place the weapon on the board' do
-      game.create_players('pl1','pl2')
+      game.create_players('pl1', 'pl2')
       game.weapon1 = 'Weapon'
       game.weapon2 = 'Weapon'
       allow(game).to receive(:gets).and_return('4')
@@ -37,7 +37,7 @@ RSpec.describe Game do
     end
 
     it 'should return true if a diagonals line is filled with the same weapon' do
-      game.game_board.board = ['X', 1, 2 , 3, 'X', 5, 6, 7, 'X']
+      game.game_board.board = ['X', 1, 2, 3, 'X', 5, 6, 7, 'X']
       expect(game.win_check).to eql(true)
     end
   end
