@@ -2,11 +2,10 @@
 
 require_relative '../lib/game.rb'
 require_relative '../lib/board.rb'
+require 'colorize'
 
 RSpec.describe Game do
   let(:game) { Game.new }
-  let(:player_choice) { 4 }
-  let(:game_board) { Board.new }
   let(:player) { Player.new('Name', 'Weapon') }
 
   context '#switch_player' do
@@ -16,31 +15,29 @@ RSpec.describe Game do
   end
 
   context '#playround' do
-    it 'should place the weapon on the board if the position is not occupied' do
-      game_board.board[player_choice] = player.weapon if game_board.board[player_choice].is_a? Integer
-      expect(game_board.board[player_choice]).to eql('Weapon')
-    end
-
-    it 'should not be able to place if already occupied' do
-      game_board.board[player_choice] = 'Weapon'
-      game_board.board[player_choice] = 'O' if game_board.board[player_choice].is_a? Integer
-      expect(game_board.board[player_choice]).to eql('Weapon')
+    it 'should place the weapon on the board' do
+      game.create_players('pl1','pl2')
+      game.weapon1 = 'Weapon'
+      game.weapon2 = 'Weapon'
+      allow(game).to receive(:gets).and_return('4')
+      allow(game.playround).to receive(:player_choice)
+      expect(game.game_board.board[4]).to eql('Weapon'.red)
     end
   end
 
   context '#win_check' do
     it 'should return true if a horizontal line is filled with the same weapon' do
-      allow(game).to receive(:win_horizontals).and_return(true)
+      game.game_board.board = ['X', 'X', 'X', 3, 4, 5, 6, 7, 8]
       expect(game.win_check).to eql(true)
     end
 
     it 'should return true if a vertical line is filled with the same weapon' do
-      allow(game).to receive(:win_verticals).and_return(true)
+      game.game_board.board = ['X', 1, 2, 'X', 4, 5, 'X', 7, 8]
       expect(game.win_check).to eql(true)
     end
 
     it 'should return true if a diagonals line is filled with the same weapon' do
-      allow(game).to receive(:win_diagonals).and_return(true)
+      game.game_board.board = ['X', 1, 2 , 3, 'X', 5, 6, 7, 'X']
       expect(game.win_check).to eql(true)
     end
   end
@@ -51,7 +48,7 @@ RSpec.describe Game do
     end
 
     it 'should return true if no item is an integer' do
-      full_board = game_board.board.map { 'X' }
+      full_board = game.game_board.board.map { 'X' }
       expect(full_board.none? { |i| i.is_a? Integer }).to eql(true)
     end
   end
