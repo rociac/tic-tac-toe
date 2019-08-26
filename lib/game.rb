@@ -34,14 +34,14 @@ class Game
         puts "#{@player1.name.red} choose a number from 0 to 8 to place your weapon"
         @player_choice = gets.chomp.to_i
         if @game_board.board[@player_choice].is_a? Integer
-          @game_board.board[@player_choice] = @player1.weapon.red
+          @game_board.board[@player_choice] = @weapon1.red
           @input = true
         end
       else
         puts "#{@player2.name.blue} choose a number from 0 to 8 to place your weapon"
         @player_choice = gets.chomp.to_i
         if @game_board.board[@player_choice].is_a? Integer
-          @game_board.board[@player_choice] = @player2.weapon.blue
+          @game_board.board[@player_choice] = @weapon2.blue
           @input = true
         end
       end
